@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h3>
+    Home Page of {{ user.get_username }}
+</h3>
+
+    {% for deck in user.deck.all %}
+        <p><a class="btn btn-success" href="/createflash-{{deck.id}}" role="button"> + </a>
+        {% if deck.flashCard.all.0 == None %}
+            <a class="btn btn-primary" href="/createflash-{{deck.id}}" role="button"> {{deck.name}}</a></p>
+        {% else %}
+            <a class="btn btn-primary" href="/question-{{deck.flashCard.all.0.id}}" role="button"> {{deck.name}}</a></p>
+        {% endif %}
+    {% endfor %}
+
+    <p> Add a new Deck: </p> 
+    <form method="post" action="/" class="form-group">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+            <button type="submit", name="save" class="btn btn-success"> + </button>
+            </div>
+            {{form.name}}
+        </div>
+    </form>
+{% else %}
+<h3>
+    Home Page 
+</h3>
+
+<p> Please <a href="/login">Login</a> to see your FlashCards</a>
+{% endif %}
+{% endblock %}
