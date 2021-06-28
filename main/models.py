@@ -11,10 +11,9 @@ class deck(models.Model):
 
 class flashCard(models.Model):
     deck = models.ForeignKey(deck, on_delete=models.CASCADE, related_name="flashCard", null=True)
-    name = models.CharField(max_length=100, blank = True)
     question = models.CharField(max_length = 200)
     answer = models.TextField()
     
 
     def __str__(self):
-        return self.name
+        return self.question
