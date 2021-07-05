@@ -7,6 +7,7 @@ __pycache__
 db.sqlite3
 media
 flashcard/
+secret_key.txt
 
 # Backup files # 
 *.bak 
